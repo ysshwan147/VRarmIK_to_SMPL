@@ -6,7 +6,7 @@ namespace VRArmIKtoSMPL
 {
 	public class Collar : MonoBehaviour {
 
-		public AvatarVRTrackingReferences avatarTrackingReferences;
+		public Transform target;
 		public UpperBodyTransform upperBody;
 		public Transform shoulder;
 
@@ -15,6 +15,7 @@ namespace VRArmIKtoSMPL
 		[LabelOverride("max forward rotation")]public float collarRotationLimitForward = 33f;
 		[LabelOverride("max upward rotation")] public float collarRotationLimitUpward = 33f;
 		public float collarRotationMultiplier = 30;
+		public float noRotationThreshold = 0.5f;
 
 
 		private Vector3 shoulderStartLocalPosition;
@@ -27,53 +28,37 @@ namespace VRArmIKtoSMPL
 		
 		// Update is called once per frame
 		void Update () {
-			rotateCollarForward();
-            rotateCollarUpward();
+			rotateCollar();
         }
 
-		void rotateCollarForward()
+		/// <summary>
+		/// 앞쪽과 위쪽 방향으로의 collar rotation
+		/// 논문에선 shoulder joint의 yaw(y축 회전)와 roll(z축 회전)의 rotation으로 설명
+		/// threshold: 0.5
+		/// multiplier: 30
+		/// clamp: 0~33
+		/// </summary>
+		void rotateCollar()
 		{
-			Vector3 handShoulderOffset = calcHandShoulderOffset();
+			Vector3 targetHandPosition = target.position;
+            Vector3 initialShoulderPos = shoulder.transform.TransformPoint(shoulderStartLocalPosition);
+            Vector3 handShoulderOffset = targetHandPosition - initialShoulderPos;
 			Vector3 targetAngle = transform.localEulerAngles;
 			float armLength = upperBody.armLength;
 
+			// rotation forward
 			float forwardDistanceRatio = Vector3.Dot(handShoulderOffset, upperBody.transform.forward) / armLength;
 
-			targetAngle.y = Mathf.Clamp((forwardDistanceRatio - 0.5f) * collarRotationMultiplier, 0f, collarRotationLimitForward);
+			targetAngle.y = Mathf.Clamp((forwardDistanceRatio - noRotationThreshold) * collarRotationMultiplier, 0f, collarRotationLimitForward);
 			targetAngle.y *= (isLeft ? 1.0f : -1.0f);
 
-            transform.localEulerAngles = targetAngle;
-		}
+			// rotation upward
+			float upwardDistanceRatio = Vector3.Dot(handShoulderOffset, upperBody.transform.up) / armLength;
 
-        void rotateCollarUpward()
-        {
-            Vector3 handShoulderOffset = calcHandShoulderOffset();
-			Vector3 targetAngle = transform.localEulerAngles;
-            float armLength = upperBody.armLength;
-
-            float upwardDistanceRatio = Vector3.Dot(handShoulderOffset, upperBody.transform.up) / armLength;
-
-            targetAngle.z = Mathf.Clamp((upwardDistanceRatio - 0.5f) * collarRotationMultiplier, 0f, collarRotationLimitUpward);
+            targetAngle.z = Mathf.Clamp((upwardDistanceRatio - noRotationThreshold) * collarRotationMultiplier, 0f, collarRotationLimitUpward);
             targetAngle.z *= (isLeft ? -1.0f : 1.0f);
 
             transform.localEulerAngles = targetAngle;
-        }
-
-        private Vector3 calcHandShoulderOffset()
-		{
-            Vector3 targetHandPosition;
-
-            if (isLeft)
-            {
-                targetHandPosition = avatarTrackingReferences.leftHand.transform.position;
-            }
-            else
-            {
-                targetHandPosition = avatarTrackingReferences.rightHand.transform.position;
-            }
-
-            Vector3 initialShoulderPos = shoulder.transform.TransformPoint(shoulderStartLocalPosition);
-            return targetHandPosition - initialShoulderPos;
-        }
+		}
 	}
 }
