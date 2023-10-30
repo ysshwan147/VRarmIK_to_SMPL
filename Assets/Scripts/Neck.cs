@@ -113,6 +113,11 @@ namespace VRArmIKtoSMPL
             transform.position = deltaRot * shoulderHeadDiff + avatarTrackingReferences.head.transform.position;
         }
 
+        /// <summary>
+        /// neck joint를 y축에 대하여 회전(yaw)
+        /// 논문에서는 neck joint의 회전이 목과 양 어깨가 모두 회전하는 것을 의미(목 관절의 하위 오브젝트가 어깨 관절)
+        /// 즉, 상체 전제가 회전하는 것이므로 smpl 모델에서 적절한 관절에게 회전값을 줘야 함
+        /// </summary>
         void rotateNeckAboutY()
         {
             float angle = getCombinedDirectionAngleUp();
@@ -132,7 +137,11 @@ namespace VRArmIKtoSMPL
             transform.eulerAngles = targetRotation;
         }
         
-
+        /// <summary>
+        /// 양 손이 머리 앞 -> 뒤로 가면 handsBehindHead = false
+        /// handsBehindHead = false면 targetRotation.y += 180f를 통해 neck이 뒤가 아닌 앞으로 계속 향하도록 함
+        /// 양 손이 머리 뒤 -> 앞으로 가면 handsBehindHead = true
+        /// </summary>
         void detectHandsBehindHead(ref Vector3 targetRotation)
         {
             float delta = Mathf.Abs(targetRotation.y - lastAngle.y + 360f) % 360f;
@@ -149,6 +158,9 @@ namespace VRArmIKtoSMPL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         void clampHeadRotationDeltaUp(ref Vector3 targetRotation)
         {
             float headUpRotation = (avatarTrackingReferences.head.transform.eulerAngles.y + 360f) % 360f;
@@ -172,7 +184,9 @@ namespace VRArmIKtoSMPL
             }
         }
 
-
+        /// <summary>
+        /// 양 손 위치에 대해 상체 forward vector의 y축에 대한 회전값 반환
+        /// </summary>
         float getCombinedDirectionAngleUp()
         {
             Transform leftHand = avatarTrackingReferences.leftHand.transform, rightHand = avatarTrackingReferences.rightHand.transform;
