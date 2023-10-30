@@ -897,6 +897,26 @@ MonoBehaviour:
   xStartDistance: 0.1
   minAngle: 13
   maxAngle: 175
+  correctElbowOutside: 1
+  weight1: 0.5
+  startBelowZ: 0.4
+  startAboveY: 0.1
+  useFixedElbowWhenNearShoulder: 1
+  startBelowDistance: 0.5
+  startBelowY: 0.1
+  weight2: 2
+  localElbowPos: {x: 0.3, y: -1, z: -2}
+  useWristRotation: 1
+  rotationWithHandRight: 1
+  rotationWithHandForward: 1
+  handDeltaPow: 1.5
+  handDeltaFactor: -0.3
+  handDeltaOffset: 45
+  handDeltaForwardPow: 2
+  handDeltaForwardFactor: 1
+  handDeltaForwardOffset: 0
+  handDeltaForwardDeadzone: 0.3
+  rotateElbowWithHandDelay: 0.08
 --- !u!1 &1061893734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,13 +1694,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985e4e52da34be44286e7e1a0dd7d7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarTrackingReferences: {fileID: 783212397}
+  target: {fileID: 176461462}
   upperBody: {fileID: 711618504}
+  neck: {fileID: 1221391370}
   shoulder: {fileID: 1060387118}
   isLeft: 1
   collarRotationLimitForward: 33
   collarRotationLimitUpward: 33
   collarRotationMultiplier: 30
+  noRotationThreshold: 0.5
 --- !u!1 &1446611744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1753,13 +1775,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985e4e52da34be44286e7e1a0dd7d7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarTrackingReferences: {fileID: 783212397}
+  target: {fileID: 1678975632}
   upperBody: {fileID: 711618504}
+  neck: {fileID: 1221391370}
   shoulder: {fileID: 2137176042}
   isLeft: 0
   collarRotationLimitForward: 33
   collarRotationLimitUpward: 33
   collarRotationMultiplier: 30
+  noRotationThreshold: 0.5
 --- !u!1 &1469751501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,6 +2284,26 @@ MonoBehaviour:
   xStartDistance: 0.1
   minAngle: 13
   maxAngle: 175
+  correctElbowOutside: 1
+  weight1: 0.5
+  startBelowZ: 0.4
+  startAboveY: 0.1
+  useFixedElbowWhenNearShoulder: 1
+  startBelowDistance: 0.5
+  startBelowY: 0.1
+  weight2: 2
+  localElbowPos: {x: 0.3, y: -1, z: -2}
+  useWristRotation: 1
+  rotationWithHandRight: 1
+  rotationWithHandForward: 1
+  handDeltaPow: 1.5
+  handDeltaFactor: -0.3
+  handDeltaOffset: 45
+  handDeltaForwardPow: 2
+  handDeltaForwardFactor: 1
+  handDeltaForwardOffset: 0
+  handDeltaForwardDeadzone: 0.3
+  rotateElbowWithHandDelay: 0.08
 --- !u!114 &1966136678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2314,6 +2358,26 @@ MonoBehaviour:
   xStartDistance: 0.1
   minAngle: 13
   maxAngle: 175
+  correctElbowOutside: 1
+  weight1: 0.5
+  startBelowZ: 0.4
+  startAboveY: 0.1
+  useFixedElbowWhenNearShoulder: 1
+  startBelowDistance: 0.5
+  startBelowY: 0.1
+  weight2: 2
+  localElbowPos: {x: 0.3, y: -1, z: -2}
+  useWristRotation: 1
+  rotationWithHandRight: 1
+  rotationWithHandForward: 1
+  handDeltaPow: 1.5
+  handDeltaFactor: -0.3
+  handDeltaOffset: 45
+  handDeltaForwardPow: 2
+  handDeltaForwardFactor: 1
+  handDeltaForwardOffset: 0
+  handDeltaForwardDeadzone: 0.3
+  rotateElbowWithHandDelay: 0.08
 --- !u!114 &1966136680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2325,13 +2389,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985e4e52da34be44286e7e1a0dd7d7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarTrackingReferences: {fileID: 1061893735}
+  target: {fileID: 0}
   upperBody: {fileID: 1966136678}
-  shoulder: {fileID: 1966136663}
+  neck: {fileID: 0}
+  shoulder: {fileID: 0}
   isLeft: 0
   collarRotationLimitForward: 33
   collarRotationLimitUpward: 33
   collarRotationMultiplier: 30
+  noRotationThreshold: 0.5
 --- !u!114 &1966136681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,13 +2436,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985e4e52da34be44286e7e1a0dd7d7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarTrackingReferences: {fileID: 1061893735}
+  target: {fileID: 0}
   upperBody: {fileID: 1966136678}
-  shoulder: {fileID: 1966136669}
+  neck: {fileID: 0}
+  shoulder: {fileID: 0}
   isLeft: 1
   collarRotationLimitForward: 33
   collarRotationLimitUpward: 33
   collarRotationMultiplier: 30
+  noRotationThreshold: 0.5
 --- !u!1001 &1983056217
 Prefab:
   m_ObjectHideFlags: 0
@@ -2812,3 +2880,23 @@ MonoBehaviour:
   xStartDistance: 0.1
   minAngle: 13
   maxAngle: 175
+  correctElbowOutside: 1
+  weight1: 0.5
+  startBelowZ: 0.4
+  startAboveY: 0.1
+  useFixedElbowWhenNearShoulder: 1
+  startBelowDistance: 0.5
+  startBelowY: 0.1
+  weight2: 2
+  localElbowPos: {x: 0.3, y: -1, z: -2}
+  useWristRotation: 1
+  rotationWithHandRight: 1
+  rotationWithHandForward: 1
+  handDeltaPow: 1.5
+  handDeltaFactor: -0.3
+  handDeltaOffset: 45
+  handDeltaForwardPow: 2
+  handDeltaForwardFactor: 1
+  handDeltaForwardOffset: 0
+  handDeltaForwardDeadzone: 0.3
+  rotateElbowWithHandDelay: 0.08

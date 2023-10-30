@@ -8,6 +8,7 @@ namespace VRArmIKtoSMPL
 
 		public Transform target;
 		public UpperBodyTransform upperBody;
+		public Transform neck;
 		public Transform shoulder;
 
 		public bool isLeft = false;
@@ -23,8 +24,8 @@ namespace VRArmIKtoSMPL
 
 		// Use this for initialization
 		void Start () {
-			shoulderStartLocalPosition = shoulder.transform.localPosition;
-		}
+			shoulderStartLocalPosition = neck.transform.InverseTransformPoint(shoulder.position);
+        }
 		
 		// Update is called once per frame
 		void Update () {
@@ -41,7 +42,7 @@ namespace VRArmIKtoSMPL
 		void rotateCollar()
 		{
 			Vector3 targetHandPosition = target.position;
-            Vector3 initialShoulderPos = shoulder.transform.TransformPoint(shoulderStartLocalPosition);
+            Vector3 initialShoulderPos = neck.transform.TransformPoint(shoulderStartLocalPosition);
             Vector3 handShoulderOffset = targetHandPosition - initialShoulderPos;
 			Vector3 targetAngle = transform.localEulerAngles;
 			float armLength = upperBody.armLength;
