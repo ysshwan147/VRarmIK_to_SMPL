@@ -5,6 +5,11 @@ namespace VRArmIKtoSMPL
     [ExecuteInEditMode]
     public class PoseManager : MonoBehaviour
     {
+        /// <summary>
+        /// VRarmIK github에 있던 스크립트
+        /// 논문에서 상수로 두던 값들 hmd 높이, 어깨 넓이, 손목 사이 넓이(팔길이 + 어깨넓이) 정의됨
+        /// UpperBodyTransform로 옮김
+        /// </summary>
         public static PoseManager Instance = null;
         public VRTrackingReferences vrTransforms;
 

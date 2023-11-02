@@ -17,22 +17,6 @@ namespace VRArmIKtoSMPL
 		public float lowerArmLength = 0.0f;
         public float armLength = 0.0f;
 
-        //Quaternion shoulderStartRotation, elbowStartRotation, wristStartRotation;
-
-        //Vector3 upperArmPos => arm.upperArm.position;
-        //Vector3 lowerArmPos => arm.lowerArm.position;
-        //Vector3 handPos => arm.hand.position;
-
-        //Quaternion upperArmRotation => arm.upperArm.rotation * Quaternion.Inverse(upperArmStartRotation);
-        //Quaternion lowerArmRotation => arm.lowerArm.rotation * Quaternion.Inverse(lowerArmStartRotation);
-        //Quaternion handRotation => arm.hand.rotation * Quaternion.Inverse(handStartRotation);
-
-        //void setShoulderRotation(Quaternion rotation) => shoulder.rotation = rotation * upperArmStartRotation;
-        //void setElbowRotation(Quaternion rotation) => arm.lowerArm.rotation = rotation * lowerArmStartRotation;
-        //void setElbowLocalRotation(Quaternion rotation) => arm.lowerArm.rotation = upperArmRotation * rotation * lowerArmStartRotation;
-        //void setWristRotation(Quaternion rotation) => arm.wrist1.rotation = rotation * wristStartRotation;
-        //void setWristLocalRotation(Quaternion rotation) => arm.wrist1.rotation = arm.lowerArm.rotation * rotation * wristStartRotation;
-
 
         // Use this for initialization
         void Awake()

@@ -120,6 +120,10 @@ namespace VRArmIKtoSMPL
             transform.rotation = rotation * transform.rotation;
         }
 
+        /// <summary>
+        /// elbow가 어깨의 수직 축에 가까울 때 손의 위치가 
+        /// 이를 해결하기 위해 threshold 이내에서 고정 벡터 localElbowPos로 linearly blend함
+        /// </summary>
         void correctElbowAfterPositioning()
         {
             Vector3 localTargetPos = transform.InverseTransformPoint(target.position) / upperBody.armLength;
