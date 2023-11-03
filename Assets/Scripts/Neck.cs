@@ -2,6 +2,12 @@
 
 namespace VRArmIKtoSMPL
 {
+    /// <summary>
+    /// 논문에서는 neck joint의 회전이 목과 양 어깨가 모두 회전하는 것을 의미(목 관절의 하위 오브젝트가 어깨 관절)
+    /// 즉, 상체가 회전하는 것이므로 smpl 모델에서 적절한 관절에게 회전값을 줘야 함
+    /// 목과 양 어깨(정확히는 collar)의 상위 오브젝트들 중 하나에 회전값을 주거나, 각각에 나눠서 회전값을 주는 방법이 고려됨
+    /// 현재 구현에서는 상위 오브젝트 중 하나인 spine3에 회전값을 주는 방법 사용
+    /// </summary>
 	public class Neck : MonoBehaviour
 	{
 
@@ -57,7 +63,9 @@ namespace VRArmIKtoSMPL
             transform.parent.localPosition = transform.parent.InverseTransformPoint(targetPosition);
         }
 
-
+        /// <summary>
+        /// hmd의 x축 회전(pitch)에 대해서 
+        /// </summary>
         // pitch of hmd(beta_H) 를 구할 때,
         // 새로 작성한 코드는 hmd의 transform.eulerAngles.x로 그대로 사용
         // 깃헙 코드는 상체 forward vector와 hmd forward vector의 차이를 사용
@@ -114,9 +122,7 @@ namespace VRArmIKtoSMPL
         }
 
         /// <summary>
-        /// neck joint를 y축에 대하여 회전(yaw)
-        /// 논문에서는 neck joint의 회전이 목과 양 어깨가 모두 회전하는 것을 의미(목 관절의 하위 오브젝트가 어깨 관절)
-        /// 즉, 상체 전제가 회전하는 것이므로 smpl 모델에서 적절한 관절에게 회전값을 줘야 함
+        /// 상체를 y축에 대하여 회전(yaw)
         /// </summary>
         void rotateNeckAboutY()
         {
@@ -138,6 +144,8 @@ namespace VRArmIKtoSMPL
         }
         
         /// <summary>
+        /// 머리로부터 양 손까지의 두 벡터가 이루는 각이 180도를 넘어가면 상체가 바라보아야 할 forward vector의 방향이 뒤쪽을 향하게 됨
+        /// 이를 확인해서 뒤 쪽을 향하게 되었을 때 180도를 더해 계속 앞으로 향할 수 있도록 함
         /// 양 손이 머리 앞 -> 뒤로 가면 handsBehindHead = false
         /// handsBehindHead = false면 targetRotation.y += 180f를 통해 neck이 뒤가 아닌 앞으로 계속 향하도록 함
         /// 양 손이 머리 뒤 -> 앞으로 가면 handsBehindHead = true
@@ -159,7 +167,7 @@ namespace VRArmIKtoSMPL
         }
 
         /// <summary>
-        /// 
+        /// head y축 rotation에 대해서 상체 y축 rotation을 maxDeltaHeadRotation만큼 clamp
         /// </summary>
         void clampHeadRotationDeltaUp(ref Vector3 targetRotation)
         {
@@ -167,12 +175,16 @@ namespace VRArmIKtoSMPL
             float targetUpRotation = (targetRotation.y + 360f) % 360f;
 
             float delta = headUpRotation - targetUpRotation;
-
+            
+            // 예를 들어 head가 forward vector가 정면을 향하고 있다고 가정했을 때(y축 회전값이 0일 때),
+            // upper body의 target forward vector와의 delta가
+            // maxDeltaHeadRotation ~ 180도에 있는 경우 확인(오른쪽 뒤를 향하고 있는 것)
             if (delta > maxDeltaHeadRotation && delta < 180f || delta < -180f && delta >= -360f + maxDeltaHeadRotation)
             {
                 targetRotation.y = headUpRotation - maxDeltaHeadRotation;
                 clampingHeadRotation = true;
             }
+            // -maxDeltaHeadRotation ~ -180도에 있는 경우 확인(왼쪽 뒤를 향하고 있는 것)
             else if (delta < -maxDeltaHeadRotation && delta > -180 || delta > 180f && delta < 360f - maxDeltaHeadRotation)
             {
                 targetRotation.y = headUpRotation + maxDeltaHeadRotation;
@@ -185,7 +197,7 @@ namespace VRArmIKtoSMPL
         }
 
         /// <summary>
-        /// 양 손 위치에 대해 상체 forward vector의 y축에 대한 회전값 반환
+        /// 양 손 위치에 대해 상체 forward vector의 y축 회전값 계산 및 반환
         /// </summary>
         float getCombinedDirectionAngleUp()
         {
