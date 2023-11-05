@@ -2,10 +2,15 @@
 
 namespace VRArmIKtoSMPL
 {
+    /// <summary>
+    /// neck의 y축 회전(yaw)를 neck, shoulder 모두 회전해야 하기 때문에 upper body의 회전으로 변경
+    /// neck과 shoulder의 상위인 spine3에 적용
+    /// </summary>
 	public class Spine3 : MonoBehaviour
 	{
         public AvatarVRTrackingReferences avatarTrackingReferences;
 
+        // 논문에선 90도로 제한 뒀지만 깃헙에선 80도로 제한되어있어 80 사용
         public float maxDeltaHeadRotation = 80f;
 
         public bool autoDetectHandsBehindHead = true;
@@ -73,7 +78,7 @@ namespace VRArmIKtoSMPL
         /// </summary>
         private void clampHeadRotationDeltaUp(ref Vector3 targetRotation)
         {
-            float headUpRotation = (avatarTrackingReferences.head.transform.eulerAngles.y + 360f) % 360f;
+            float headUpRotation = (avatarTrackingReferences.head.eulerAngles.y + 360f) % 360f;
             float targetUpRotation = (targetRotation.y + 360f) % 360f;
 
             float delta = headUpRotation - targetUpRotation;
@@ -103,7 +108,7 @@ namespace VRArmIKtoSMPL
         /// </summary>
         private float getCombinedDirectionAngleUp()
         {
-            Transform leftHand = avatarTrackingReferences.leftHand.transform, rightHand = avatarTrackingReferences.rightHand.transform;
+            Transform leftHand = avatarTrackingReferences.leftHand, rightHand = avatarTrackingReferences.rightHand;
 
             Vector3 distanceLeftHand = leftHand.position - transform.position,
                 distanceRightHand = rightHand.position - transform.position;

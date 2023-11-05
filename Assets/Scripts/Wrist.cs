@@ -5,14 +5,10 @@ namespace VRArmIKtoSMPL
     public class Wrist : MonoBehaviour
     {
         public Transform target;
-        public Transform elbow;
 
         public bool isLeft = false;
 
         Quaternion startRotation;
-        Vector3 armDirection => isLeft ? Vector3.left : Vector3.right;
-
-        Quaternion wristRotation => transform.rotation * Quaternion.Inverse(startRotation);
 
         void setRotation(Quaternion rotation) => transform.rotation = rotation * startRotation;
         void setLocalRotation(Quaternion rotation) => transform.rotation = transform.parent.rotation * rotation * startRotation;

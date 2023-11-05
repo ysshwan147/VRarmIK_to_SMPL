@@ -8,7 +8,6 @@ namespace VRArmIKtoSMPL
 
 		public Transform target;
 		public UpperBodyTransform upperBody;
-		public Transform neck;
 		public Transform shoulder;
 
 		public bool isLeft = false;
@@ -18,13 +17,11 @@ namespace VRArmIKtoSMPL
 		public float collarRotationMultiplier = 30;
 		public float noRotationThreshold = 0.5f;
 
-
 		private Vector3 shoulderStartLocalPosition;
-		
 
 		// Use this for initialization
 		void Start () {
-			shoulderStartLocalPosition = neck.transform.InverseTransformPoint(shoulder.position);
+			shoulderStartLocalPosition = transform.parent.InverseTransformPoint(shoulder.position);
         }
 		
 		// Update is called once per frame
@@ -42,19 +39,19 @@ namespace VRArmIKtoSMPL
 		void rotateCollar()
 		{
 			Vector3 targetHandPosition = target.position;
-            Vector3 initialShoulderPos = neck.transform.TransformPoint(shoulderStartLocalPosition);
+            Vector3 initialShoulderPos = transform.parent.TransformPoint(shoulderStartLocalPosition);
             Vector3 handShoulderOffset = targetHandPosition - initialShoulderPos;
 			Vector3 targetAngle = transform.localEulerAngles;
 			float armLength = upperBody.armLength;
 
 			// rotation forward
-			float forwardDistanceRatio = Vector3.Dot(handShoulderOffset, upperBody.transform.forward) / armLength;
+			float forwardDistanceRatio = Vector3.Dot(handShoulderOffset, transform.parent.forward) / armLength;
 
 			targetAngle.y = Mathf.Clamp((forwardDistanceRatio - noRotationThreshold) * collarRotationMultiplier, 0f, collarRotationLimitForward);
 			targetAngle.y *= (isLeft ? 1.0f : -1.0f);
 
 			// rotation upward
-			float upwardDistanceRatio = Vector3.Dot(handShoulderOffset, upperBody.transform.up) / armLength;
+			float upwardDistanceRatio = Vector3.Dot(handShoulderOffset, transform.parent.up) / armLength;
 
             targetAngle.z = Mathf.Clamp((upwardDistanceRatio - noRotationThreshold) * collarRotationMultiplier, 0f, collarRotationLimitUpward);
             targetAngle.z *= (isLeft ? -1.0f : 1.0f);
