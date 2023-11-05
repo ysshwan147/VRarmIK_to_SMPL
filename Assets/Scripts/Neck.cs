@@ -6,7 +6,9 @@ namespace VRArmIKtoSMPL
     /// 논문에서는 neck joint의 회전이 목과 양 어깨가 모두 회전하는 것을 의미(목 관절의 하위 오브젝트가 어깨 관절)
     /// 즉, 상체가 회전하는 것이므로 smpl 모델에서 적절한 관절에게 회전값을 줘야 함
     /// 목과 양 어깨(정확히는 collar)의 상위 오브젝트들 중 하나에 회전값을 주거나, 각각에 나눠서 회전값을 주는 방법이 고려됨
-    /// 현재 구현에서는 상위 오브젝트 중 하나인 spine3에 회전값을 주는 방법 사용
+    /// y축 회전은 spine3에서 수행하고
+    /// x축과 z축 회전은 spine1에서 수행하는 방향으로 구현
+    /// 논문에서는 z축 회전에 대해 추정이 어렵고 중요한 부분이 아니라서 0으로 고정하였음
     /// </summary>
 	public class Neck : MonoBehaviour
 	{
@@ -14,20 +16,19 @@ namespace VRArmIKtoSMPL
 		public AvatarVRTrackingReferences avatarTrackingReferences;
 
         public UpperBodyTransform upperBody;
+        public Transform neck;
 
         public float headNeckDistance = 0.03f;
-        public Vector3 headNeckDirectionVector = new Vector3(0f, -1f, -.05f);
+        public Vector3 headNeckDirectionVector = new Vector3(0f, -0.9f, -.05f);
+        public Vector3 neckShoulderDistance = new Vector3(0f, -.1f, -0.02f);
 
         // for pitch, beta_{n,0} and b
         public float weight1OfRotationAboutX = 135.3f;
         public float weight2OfRotationAboutX = 0.333f;
+        public float rightRotationStartHeight = 0f;
+        public float rightRotationHeadRotationOffset = -20f;
 
         public float maxDeltaHeadRotation = 80f;
-
-        public float rightRotationStartHeight = 0f;
-        public float rightRotationHeightFactor = 142f;
-        public float rightRotationHeadRotationFactor = 0.3f;
-        public float rightRotationHeadRotationOffset = -20f;
 
         public bool ignoreYPos = true;
         public bool autoDetectHandsBehindHead = true;
@@ -60,7 +61,7 @@ namespace VRArmIKtoSMPL
         {
             Vector3 headNeckOffset = avatarTrackingReferences.hmd.transform.rotation * headNeckDirectionVector;
             Vector3 targetPosition = avatarTrackingReferences.head.transform.position + headNeckOffset * headNeckDistance;
-            transform.parent.localPosition = transform.parent.InverseTransformPoint(targetPosition);
+            transform.localPosition = transform.parent.InverseTransformPoint(targetPosition) + neckShoulderDistance;
         }
 
         /// <summary>
@@ -73,44 +74,46 @@ namespace VRArmIKtoSMPL
         // hmd -90~90 밖에서 오류
         void rotateNeckAboutX()
         {
-            float referencePlayerHeightHmd = upperBody.playerHeightHmd;
-            float playerHeightHmd = avatarTrackingReferences.hmd.transform.position.y;
-            float hmdRotationAboutX = avatarTrackingReferences.hmd.transform.eulerAngles.x;
+            //float referencePlayerHeightHmd = upperBody.playerHeightHmd;
+            //float playerHeightHmd = avatarTrackingReferences.hmd.transform.position.y;
+            //float hmdRotationAboutX = avatarTrackingReferences.hmd.transform.eulerAngles.x;
 
-            // from 0~360 to -180~180
-            if (hmdRotationAboutX > 180.0f)
-            {
-                hmdRotationAboutX -= 360.0f;
-            }
+            //// from 0~360 to -180~180
+            //if (hmdRotationAboutX > 180.0f)
+            //{
+            //    hmdRotationAboutX -= 360.0f;
+            //}
 
-            float ratio = (referencePlayerHeightHmd - playerHeightHmd) / referencePlayerHeightHmd;
-            ratio = Mathf.Clamp(ratio, 0.0f, 1.0f);
+            //float ratio = (referencePlayerHeightHmd - playerHeightHmd) / referencePlayerHeightHmd;
+            //ratio = Mathf.Clamp(ratio, 0.0f, 1.0f);
 
-            float rotationAngle = 0.0f;
+            //float rotationAngle = 0.0f;
 
-            rotationAngle = ratio * (weight1OfRotationAboutX + weight2OfRotationAboutX * hmdRotationAboutX);
+            //rotationAngle = ratio * (weight1OfRotationAboutX + weight2OfRotationAboutX * hmdRotationAboutX);
 
-            Quaternion deltaRot = Quaternion.AngleAxis(rotationAngle, transform.right);
-            transform.rotation = deltaRot * transform.rotation;
+            //Quaternion deltaRot = Quaternion.AngleAxis(rotationAngle, transform.right);
+            //transform.rotation = deltaRot * transform.rotation;
 
 
             //------------------------------------
             //github code
             //------------------------------------
-            //float heightDiff = avatarTrackingReferences.hmd.transform.position.y;
-            //float relativeHeightDiff = heightDiff / upperBody.playerHeightHmd;
+            float heightDiff = avatarTrackingReferences.hmd.transform.position.y;
+            float relativeHeightDiff = (upperBody.playerHeightHmd - heightDiff) / upperBody.playerHeightHmd;
 
-            //float headRightRotation = VectorHelpers.getAngleBetween(transform.forward,
-            //                              avatarTrackingReferences.hmd.transform.forward,
-            //                              Vector3.up, transform.right) + rightRotationHeadRotationOffset;
-            //float heightFactor = Mathf.Clamp(relativeHeightDiff - rightRotationStartHeight, 0f, 1f);
+            float headRightRotation = VectorHelpers.getAngleBetween(transform.forward,
+                                          avatarTrackingReferences.hmd.transform.forward,
+                                          Vector3.up, transform.right) + rightRotationHeadRotationOffset;
 
-            //neckRightRotation = heightFactor * rightRotationHeightFactor;
-            //neckRightRotation += Mathf.Clamp(headRightRotation * rightRotationHeadRotationFactor * heightFactor, 0f, 50f);
+            float heightFactor = Mathf.Clamp(relativeHeightDiff - rightRotationStartHeight, 0f, 1f);
 
-            //Quaternion deltaRot = Quaternion.AngleAxis(neckRightRotation, transform.right);
+            neckRightRotation = heightFactor * weight1OfRotationAboutX;
+            neckRightRotation += Mathf.Clamp(headRightRotation * weight2OfRotationAboutX * heightFactor, 0f, 50f);
 
-            //transform.rotation = deltaRot * transform.rotation;
+            Quaternion deltaRot = Quaternion.AngleAxis(neckRightRotation, transform.right);
+
+            transform.rotation = deltaRot * transform.rotation;
+
             //positionNeckRelative();
         }
 
@@ -203,8 +206,8 @@ namespace VRArmIKtoSMPL
         {
             Transform leftHand = avatarTrackingReferences.leftHand.transform, rightHand = avatarTrackingReferences.rightHand.transform;
 
-            Vector3 distanceLeftHand = leftHand.position - transform.position,
-                distanceRightHand = rightHand.position - transform.position;
+            Vector3 distanceLeftHand = leftHand.position - neck.transform.position,
+                distanceRightHand = rightHand.position - neck.transform.position;
 
             if (ignoreYPos)
             {
