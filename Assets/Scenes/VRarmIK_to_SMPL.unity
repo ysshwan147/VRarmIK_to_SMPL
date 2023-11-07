@@ -697,10 +697,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e30f4137d426384593782ac50413129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 0}
-  hmd: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  head: {fileID: 2119585502}
+  hmd: {fileID: 597587675}
+  leftHand: {fileID: 176461462}
+  rightHand: {fileID: 1678975632}
 --- !u!114 &783212399
 MonoBehaviour:
   m_ObjectHideFlags: 0
