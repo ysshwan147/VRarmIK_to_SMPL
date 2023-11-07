@@ -27,7 +27,7 @@ namespace VRArmIKtoSMPL
 
         void FixedUpdate()
         {
-            rotationAngle = calcInnerAngle();
+            rotationAngle = calcRotationAngle();
         }
 
         void LateUpdate()
@@ -43,7 +43,7 @@ namespace VRArmIKtoSMPL
         /// 축: 팔꿈치를 지나고 어깨, 팔꿈치, 손목 3개 point에 대한 평면의 법선
         /// 어깨-팔꿈치 라인을 연장한 직선에서부터 lower arm의 시계방향 회전각
         /// </summary>
-        float calcInnerAngle()
+        float calcRotationAngle()
         {
             float targetShoulderDistance = (target.position - shoulder.position).magnitude;
             float angle = 0.0f;
