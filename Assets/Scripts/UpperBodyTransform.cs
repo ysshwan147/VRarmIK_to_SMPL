@@ -13,7 +13,7 @@ namespace VRArmIKtoSMPL
 		public Transform leftElbow, rightElbow;
         public Transform leftWrist, rightWrist;
 
-		public float headHmdHeightOffset = 0.6f;
+		public float headHmdHeightOffset = 0.06f;
         public float playerHeightHmd = 1.70f;
 		public float playerWidthShoulders = 0.31f;
 

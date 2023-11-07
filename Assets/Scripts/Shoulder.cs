@@ -51,8 +51,10 @@ namespace VRArmIKtoSMPL
         float interpolatedDeltaElbowForward;
 
         Quaternion startRotation;
+        Quaternion startElbowRotation;
         Vector3 armDirection => isLeft ? Vector3.left : Vector3.right;
         Quaternion shoulderRotation => transform.rotation * Quaternion.Inverse(startRotation);
+        Quaternion elbowRotation => elbow.rotation * Quaternion.Inverse(startElbowRotation);
 
         void setRotation(Quaternion rotation) => transform.rotation = rotation * startRotation;
         void setLocalRotation(Quaternion rotation) => transform.rotation = transform.parent.rotation * rotation * startRotation;
@@ -61,6 +63,7 @@ namespace VRArmIKtoSMPL
         void Awake()
         {
             startRotation = transform.rotation;
+            startElbowRotation = elbow.rotation;
         }
 
         // Update is called once per frame
@@ -75,15 +78,17 @@ namespace VRArmIKtoSMPL
 
         void rotateShoulder()
         {
+            // 타겟(손목), 어깨, 팔꿈치 삼각형에서 어깨 쪽 각도만큼 계산해서 회전
             Vector3 targetShoulderDirection = (target.position - transform.position).normalized;
-            float targetAngleAboudElbowAngle = calcAngleAboutElbowAngle();
+            float targetAngleAboutElbowAngle = calcAngleAboutElbowAngle();
 
             Quaternion toTargetRotation = Quaternion.FromToRotation(armDirection, targetShoulderDirection);
             setRotation(toTargetRotation);
 
-            // modify: elbow.rotation
-            transform.rotation = Quaternion.AngleAxis(targetAngleAboudElbowAngle, elbow.rotation * Vector3.up) * transform.rotation;
+            transform.rotation = Quaternion.AngleAxis(targetAngleAboutElbowAngle, elbowRotation * Vector3.up) * transform.rotation;
 
+
+            //
             float targetAngleAboutHandShoulderAxis = calcAngleAboutHandShoulderAxis();
 
             rotateWithAngle(targetAngleAboutHandShoulderAxis);
@@ -220,13 +225,16 @@ namespace VRArmIKtoSMPL
             // clamp angle
             angle = Mathf.Clamp(angle, minAngle, maxAngle);
 
-            return angle * (isLeft? 1.0f : -1.0f);
+            return angle * (isLeft ? 1.0f : -1.0f);
         }
 
+        /// <summary>
+        /// 타겟(손목), 어깨, 팔꿈치 삼각형에 대해 코사인법칙을 이용해 어깨쪽 각도 구하기
+        /// </summary>
+        /// <returns></returns>
         private float calcAngleAboutElbowAngle()
         {
-            float angle = 0.0f;
-            Vector3 targetShoulderDirection = (target.position - transform.position).normalized;
+            float angle;
             float targetShoulderDistance = (target.position - transform.position).magnitude;
 
             angle = (isLeft ? -1.0f : 1.0f) *

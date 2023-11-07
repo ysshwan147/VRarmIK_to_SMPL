@@ -493,7 +493,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1678975632}
-  elbow: {fileID: 949533986}
   isLeft: 0
 --- !u!1 &711618502
 GameObject:
@@ -557,7 +556,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarTrackingReferences: {fileID: 783212397}
   upperBody: {fileID: 1135803192}
-  neck: {fileID: 1221391370}
   headNeckDistance: 0.03
   headNeckDirectionVector: {x: 0, y: -1, z: -0.05}
   neckShoulderDistance: {x: 0, y: -0.1, z: -0.02}
@@ -646,7 +644,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 744866222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.008900562, y: 1.5027517, z: -0.013593631}
+  m_LocalPosition: {x: 0.008900562, y: 0, z: -0.013593631}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -699,10 +697,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e30f4137d426384593782ac50413129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 2119585503}
-  hmd: {fileID: 597587677}
-  leftHand: {fileID: 176461464}
-  rightHand: {fileID: 1678975634}
+  head: {fileID: 0}
+  hmd: {fileID: 0}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
 --- !u!114 &783212399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,10 +962,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e30f4137d426384593782ac50413129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 1373453520}
-  hmd: {fileID: 578062242}
-  leftHand: {fileID: 1070196971}
-  rightHand: {fileID: 926627964}
+  head: {fileID: 0}
+  hmd: {fileID: 0}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
 --- !u!114 &1061893736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,7 +1121,6 @@ MonoBehaviour:
   upperBody: {fileID: 1135803192}
   target: {fileID: 176461462}
   shoulder: {fileID: 1060387118}
-  wrist: {fileID: 95978488}
   isLeft: 1
 --- !u!1 &1135803190
 GameObject:
@@ -1175,8 +1172,8 @@ MonoBehaviour:
   rightElbow: {fileID: 949533986}
   leftWrist: {fileID: 95978488}
   rightWrist: {fileID: 784985040}
+  headHmdHeightOffset: 0.06
   playerHeightHmd: 1.7
-  playerWidthWrist: 1.39
   playerWidthShoulders: 0.31
   upperArmLength: 0
   lowerArmLength: 0
@@ -1196,9 +1193,8 @@ MonoBehaviour:
   upperBody: {fileID: 1135803192}
   weight1OfRotationAboutX: 135.3
   weight2OfRotationAboutX: 0.333
-  rightRotationStartHeight: 0
   rightRotationHeadRotationOffset: -20
-  neckRightRotation: 0
+  upperBodyRightRotation: 0
 --- !u!1 &1221391369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarTrackingReferences: {fileID: 783212397}
   upperBody: {fileID: 0}
-  neck: {fileID: 0}
   headNeckDistance: 0.13
   headNeckDirectionVector: {x: 0, y: -1, z: -0.05}
   neckShoulderDistance: {x: 0, y: -0.1, z: -0.02}
@@ -1760,7 +1755,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 176461462}
   upperBody: {fileID: 1135803192}
-  neck: {fileID: 1221391370}
   shoulder: {fileID: 1060387118}
   isLeft: 1
   collarRotationLimitForward: 33
@@ -1795,7 +1789,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 176461462}
-  elbow: {fileID: 2079720692}
   isLeft: 1
 --- !u!1 &1463002120
 GameObject:
@@ -1841,7 +1834,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1678975632}
   upperBody: {fileID: 1135803192}
-  neck: {fileID: 1221391370}
   shoulder: {fileID: 2137176042}
   isLeft: 0
   collarRotationLimitForward: 33
@@ -2089,7 +2081,6 @@ MonoBehaviour:
   upperBody: {fileID: 1135803192}
   target: {fileID: 1678975632}
   shoulder: {fileID: 2137176042}
-  wrist: {fileID: 784985040}
   isLeft: 0
 --- !u!1 &1856873354
 GameObject:
@@ -2387,8 +2378,8 @@ MonoBehaviour:
   rightElbow: {fileID: 1966136664}
   leftWrist: {fileID: 1966136667}
   rightWrist: {fileID: 1966136665}
+  headHmdHeightOffset: 0.6
   playerHeightHmd: 1.7
-  playerWidthWrist: 1.39
   playerWidthShoulders: 0.31
   upperArmLength: 0
   lowerArmLength: 0
@@ -2455,7 +2446,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   upperBody: {fileID: 1966136678}
-  neck: {fileID: 0}
   shoulder: {fileID: 0}
   isLeft: 0
   collarRotationLimitForward: 33
@@ -2475,7 +2465,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarTrackingReferences: {fileID: 1061893735}
   upperBody: {fileID: 1966136678}
-  neck: {fileID: 0}
   headNeckDistance: 0.13
   headNeckDirectionVector: {x: 0, y: -1, z: -0.05}
   neckShoulderDistance: {x: 0, y: -0.1, z: -0.02}
@@ -2502,7 +2491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   upperBody: {fileID: 1966136678}
-  neck: {fileID: 0}
   shoulder: {fileID: 0}
   isLeft: 1
   collarRotationLimitForward: 33
@@ -2663,43 +2651,51 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114031764788468564, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
@@ -2856,7 +2852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPosition: {x: 0.028, y: -0.031, z: -0.109}
-  localEulerAngles: {x: -90, y: -90, z: 0}
+  localEulerAngles: {x: -50, y: 0, z: -90}
 --- !u!114 &2102223452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2869,7 +2865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPosition: {x: -0.028, y: -0.031, z: -0.109}
-  localEulerAngles: {x: -90, y: 90, z: 0}
+  localEulerAngles: {x: -50, y: 0, z: 90}
 --- !u!114 &2102223453
 MonoBehaviour:
   m_ObjectHideFlags: 0

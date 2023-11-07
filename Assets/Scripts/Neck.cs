@@ -16,7 +16,6 @@ namespace VRArmIKtoSMPL
 		public AvatarVRTrackingReferences avatarTrackingReferences;
 
         public UpperBodyTransform upperBody;
-        public Transform neck;
 
         public float headNeckDistance = 0.03f;
         public Vector3 headNeckDirectionVector = new Vector3(0f, -0.9f, -.05f);
@@ -206,8 +205,8 @@ namespace VRArmIKtoSMPL
         {
             Transform leftHand = avatarTrackingReferences.leftHand.transform, rightHand = avatarTrackingReferences.rightHand.transform;
 
-            Vector3 distanceLeftHand = leftHand.position - neck.transform.position,
-                distanceRightHand = rightHand.position - neck.transform.position;
+            Vector3 distanceLeftHand = leftHand.position - transform.position,
+                distanceRightHand = rightHand.position - transform.position;
 
             if (ignoreYPos)
             {
