@@ -202,48 +202,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbaa81ec3a4874346b05f4cd3740d116, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &123903103
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 123903104}
-  - component: {fileID: 123903105}
-  m_Layer: 0
-  m_Name: LeftShoulderAnchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &123903104
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 123903103}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.122921385, y: 0.04520507, z: -0.019045997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1443385204}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &123903105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 123903103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824a7500480261e41b859df3b5c13a9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetHand: {fileID: 176461462}
-  isLeft: 1
 --- !u!1 &176461461
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,18 +871,14 @@ MonoBehaviour:
   xStartDistance: 0.1
   minAngle: 13
   maxAngle: 175
-  correctElbowOutside: 1
+  correctElbowOutside: 0
   weight1: 0.5
   startBelowZ: 0.4
   startAboveY: 0.1
-  useFixedElbowWhenNearShoulder: 1
   startBelowDistance: 0.5
   startBelowY: 0.1
   weight2: 2
   localElbowPos: {x: 0.3, y: -1, z: -2}
-  useWristRotation: 1
-  rotationWithHandRight: 1
-  rotationWithHandForward: 1
   handDeltaPow: 1.5
   handDeltaFactor: -0.3
   handDeltaOffset: 45
@@ -1369,48 +1323,6 @@ Transform:
   m_Father: {fileID: 1278475248}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1328877510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1328877511}
-  - component: {fileID: 1328877512}
-  m_Layer: 0
-  m_Name: RightShoulderAnchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1328877511
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1328877510}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.113228306, y: 0.046853278, z: -0.008472069}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1463002121}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1328877512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1328877510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824a7500480261e41b859df3b5c13a9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetHand: {fileID: 1678975632}
-  isLeft: 0
 --- !u!1 &1333899280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,7 +1650,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1060387118}
-  - {fileID: 123903104}
   m_Father: {fileID: 711618503}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1816,7 +1727,6 @@ Transform:
   m_LocalPosition: {x: 0.082953654, y: 0.1124723, z: -0.023707384}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1328877511}
   - {fileID: 2137176042}
   m_Father: {fileID: 711618503}
   m_RootOrder: 2
@@ -2111,48 +2021,6 @@ Transform:
   m_Father: {fileID: 1419382765}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1903171558
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1903171559}
-  - component: {fileID: 1903171560}
-  m_Layer: 0
-  m_Name: RightElbowAnchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1903171559
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1903171558}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.26012748, y: -0.01436929, z: -0.03126873}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2137176042}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1903171560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1903171558}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824a7500480261e41b859df3b5c13a9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetHand: {fileID: 1678975632}
-  isLeft: 0
 --- !u!1 &1963975460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,14 +2211,10 @@ MonoBehaviour:
   weight1: 0.5
   startBelowZ: 0.4
   startAboveY: 0.1
-  useFixedElbowWhenNearShoulder: 1
   startBelowDistance: 0.5
   startBelowY: 0.1
   weight2: 2
   localElbowPos: {x: 0.3, y: -1, z: -2}
-  useWristRotation: 1
-  rotationWithHandRight: 1
-  rotationWithHandForward: 1
   handDeltaPow: 1.5
   handDeltaFactor: -0.3
   handDeltaOffset: 45
@@ -2417,14 +2281,10 @@ MonoBehaviour:
   weight1: 0.5
   startBelowZ: 0.4
   startAboveY: 0.1
-  useFixedElbowWhenNearShoulder: 1
   startBelowDistance: 0.5
   startBelowY: 0.1
   weight2: 2
   localElbowPos: {x: 0.3, y: -1, z: -2}
-  useWristRotation: 1
-  rotationWithHandRight: 1
-  rotationWithHandForward: 1
   handDeltaPow: 1.5
   handDeltaFactor: -0.3
   handDeltaOffset: 45
@@ -2961,9 +2821,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 949533986}
-  - {fileID: 1903171559}
   m_Father: {fileID: 1463002121}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2137176043
 MonoBehaviour:
@@ -2994,18 +2853,14 @@ MonoBehaviour:
   xStartDistance: 0.1
   minAngle: 13
   maxAngle: 175
-  correctElbowOutside: 1
+  correctElbowOutside: 0
   weight1: 0.5
   startBelowZ: 0.4
   startAboveY: 0.1
-  useFixedElbowWhenNearShoulder: 1
   startBelowDistance: 0.5
   startBelowY: 0.1
   weight2: 2
   localElbowPos: {x: 0.3, y: -1, z: -2}
-  useWristRotation: 1
-  rotationWithHandRight: 1
-  rotationWithHandForward: 1
   handDeltaPow: 1.5
   handDeltaFactor: -0.3
   handDeltaOffset: 45

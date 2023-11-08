@@ -28,7 +28,7 @@ namespace VRArmIKtoSMPL
         public float minAngle = 13.0f;
         public float maxAngle = 175.0f;
 
-        public bool correctElbowOutside = true;
+        public bool correctElbowOutside = false;
         public float weight1 = -0.5f;
         public float startBelowZ = 0.4f;
         public float startAboveY = 0.1f;
@@ -68,7 +68,8 @@ namespace VRArmIKtoSMPL
         void Update()
         {
             rotateShoulderAboutElbowAngle();
-            correctElbowRotation();
+
+            if (correctElbowOutside) correctElbowRotation();
 
             rotateShoulderAboutHandShoulderAxis();
             correctElbowAfterPositioning();
@@ -114,6 +115,7 @@ namespace VRArmIKtoSMPL
         }
 
         /// <summary>
+        /// 논문에 언급X
         /// target이 축 근처에서 움직일 때의 보정
         /// startBelowZ = 0.4, startAboveY = 0.1, weight1 = -0.5
         /// </summary>
