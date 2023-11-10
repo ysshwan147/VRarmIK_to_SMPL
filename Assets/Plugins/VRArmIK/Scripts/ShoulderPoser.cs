@@ -170,7 +170,7 @@ namespace VRArmIK
 		protected virtual void rotateShoulderRight()
 		{
 			float heightDiff = vrTrackingReferences.hmd.transform.position.y;
-			float relativeHeightDiff = heightDiff / PoseManager.Instance.playerHeightHmd;
+			float relativeHeightDiff = (PoseManager.Instance.playerHeightHmd - heightDiff) / PoseManager.Instance.playerHeightHmd;
 
 			float headRightRotation = VectorHelpers.getAngleBetween(shoulder.transform.forward,
 										  avatarTrackingReferences.hmd.transform.forward,
