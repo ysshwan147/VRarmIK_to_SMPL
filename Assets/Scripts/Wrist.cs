@@ -20,7 +20,7 @@ namespace VRArmIKtoSMPL
         }
 
         // Update is called once per frame
-        void Update()
+        void LateUpdate()
         {
             rotateWrist();
         }

@@ -27,15 +27,22 @@ namespace VRArmIKtoSMPL
 
         void FixedUpdate()
         {
-            rotationAngle = calcRotationAngle();
+            
         }
 
-        void LateUpdate()
+        void Update()
         {
+            rotationAngle = calcRotationAngle();
+
             Vector3 eulerAngles = new Vector3();
             eulerAngles.y = rotationAngle;
 
             setLocalRotation(Quaternion.Euler(eulerAngles));
+        }
+
+        void LateUpdate()
+        {
+            
         }
 
         /// <summary>

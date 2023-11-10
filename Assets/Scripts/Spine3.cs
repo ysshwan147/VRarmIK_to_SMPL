@@ -13,6 +13,7 @@ namespace VRArmIKtoSMPL
         // 논문에선 90도로 제한 뒀지만 깃헙에선 80도로 제한되어있어 80 사용
         public float maxDeltaHeadRotation = 80f;
 
+        public bool splitRotationWithParent = false;
         public bool autoDetectHandsBehindHead = true;
         public bool clampRotationToHead = true;
 
@@ -46,7 +47,18 @@ namespace VRArmIKtoSMPL
                 clampHeadRotationDeltaUp(ref targetRotation);
             }
 
-            transform.localEulerAngles = targetRotation;
+            // 상체 y축 회전을 spine2와 spine3가 절반씩 회전
+            if (splitRotationWithParent)
+            {
+                Vector3 halfRotation = targetRotation / 2f;
+
+                transform.localEulerAngles = halfRotation;
+                transform.parent.localEulerAngles = halfRotation;
+            }
+            else
+            {
+                transform.localEulerAngles = targetRotation;
+            }
         }
 
         /// <summary>

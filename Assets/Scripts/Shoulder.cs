@@ -9,9 +9,12 @@ namespace VRArmIKtoSMPL
         public Transform target;
         public Transform elbow, wrist;
 
+        public Transform neck;
+
         public bool isLeft = false;
 
-        public float offsetAngle = 15.0f;
+        // for calculation of elbow angle about shoulder-hand axis
+        public float offsetAngle = 135.0f;
 
         public float xBias = 30.0f;
         public float yBias = 120.0f;
@@ -25,21 +28,25 @@ namespace VRArmIKtoSMPL
         public float xWeight = -50.0f;
         public float xStartDistance = 0.1f;
 
+        public bool softClampElbowAngle = true;
+        public float softClampRange = 10.0f;
         public float minAngle = 13.0f;
         public float maxAngle = 175.0f;
 
+        // for correction 
         public bool correctElbowOutside = false;
         public float weight1 = -0.5f;
         public float startBelowZ = 0.4f;
         public float startAboveY = 0.1f;
 
-
+        public bool useFixedElbowWhenNearShoulder = true;
         public float startBelowDistance = 0.5f;
         public float startBelowY = 0.1f;
         public float weight2 = 2.0f;
         public Vector3 localElbowPos = new Vector3(0.3f, -1.0f, -2.0f);
 
-
+        public bool rotateElbowWithHandRight = true;
+        public bool rotateElbowWithHandForward = true;
         public float handDeltaPow = 1.5f, handDeltaFactor = -.3f, handDeltaOffset = 45f;
         // todo fix rotateElbowWithHandForward with factor != 1 -> horrible jumps. good value would be between [0.4, 0.6]
         public float handDeltaForwardPow = 2f, handDeltaForwardFactor = 1f, handDeltaForwardOffset = 0f, handDeltaForwardDeadzone = .3f;
@@ -72,9 +79,10 @@ namespace VRArmIKtoSMPL
             if (correctElbowOutside) correctElbowRotation();
 
             rotateShoulderAboutHandShoulderAxis();
-            correctElbowAfterPositioning();
-            rotateElbowWithWristRight();
-            rotateElbowWithWristFoward();
+
+            if (useFixedElbowWhenNearShoulder) correctElbowAfterPositioning();
+            if (rotateElbowWithHandRight) rotateElbowWithWristRight();
+            if (rotateElbowWithHandForward) rotateElbowWithWristFoward();
         }
 
         /// <summary>
@@ -146,6 +154,7 @@ namespace VRArmIKtoSMPL
         /// <summary>
         /// target이 축 근처에서 움직일 때의 보정
         /// threshold 이내에서 고정 벡터 localElbowPos로 linearly blend함
+        /// localElbowPos = Vector3(0.3f, -1.0f, -2.0f)
         /// startBelowY = 0.1, weight2 = 2.0f, startBelowDistance = 0.5
         /// </summary>
         void correctElbowAfterPositioning()
@@ -164,7 +173,7 @@ namespace VRArmIKtoSMPL
 
 
             Vector3 distance = target.position - transform.position;
-            distance = distance.magnitude * upperBody.transform.InverseTransformDirection(distance / distance.magnitude);
+            distance = distance.magnitude * neck.transform.InverseTransformDirection(distance / distance.magnitude);
 
             float weight = Mathf.Clamp01(Mathf.Clamp01((startBelowDistance - distance.xz().magnitude / upperBody.armLength) /
                            startBelowDistance) * weight2 + Mathf.Clamp01((-distance.z + .1f) * 3)) *
@@ -235,7 +244,7 @@ namespace VRArmIKtoSMPL
         /// </summary>
         private float calcAngleAboutHandShoulderAxis()
         {
-            Vector3 localWristPosNormalized = transform.InverseTransformDirection(wrist.position) / upperBody.armLength;
+            Vector3 localWristPosNormalized = transform.InverseTransformPoint(wrist.position) / upperBody.armLength;
             float angle = offsetAngle;
 
             // angle from Y
@@ -250,8 +259,22 @@ namespace VRArmIKtoSMPL
             // angle from X
             angle += xWeight * Mathf.Max(localWristPosNormalized.x * (isLeft ? 1.0f : -1.0f) + xStartDistance, 0f);
 
+            //Debug.Log(angle);
+            //angle %= 360f;
+
             // clamp angle
-            angle = Mathf.Clamp(angle, minAngle, maxAngle);
+            if (softClampElbowAngle)
+            {
+                if (angle < minAngle + softClampRange)
+                {
+                    float a = minAngle + softClampRange - angle;
+                    angle = minAngle + softClampRange * (1f - Mathf.Log(1f + a) * 3f);
+                }
+            }
+            else
+            {
+                angle = Mathf.Clamp(angle, minAngle, maxAngle);
+            }
 
             return angle * (isLeft ? -1.0f : 1.0f);
         }
