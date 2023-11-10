@@ -460,7 +460,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 711618503}
-  - component: {fileID: 711618505}
   - component: {fileID: 711618504}
   m_Layer: 0
   m_Name: m_avg_Spine3
@@ -502,32 +501,6 @@ MonoBehaviour:
   autoDetectHandsBehindHead: 1
   clampRotationToHead: 1
   clampingHeadRotation: 0
---- !u!114 &711618505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 711618502}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a941b1ce8c786b440ac8deb980cc664f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  avatarTrackingReferences: {fileID: 783212397}
-  upperBody: {fileID: 1135803192}
-  headNeckDistance: 0.03
-  headNeckDirectionVector: {x: 0, y: -1, z: -0.05}
-  neckShoulderDistance: {x: 0, y: -0.1, z: -0.02}
-  weight1OfRotationAboutX: 135.3
-  weight2OfRotationAboutX: 0.333
-  rightRotationStartHeight: 0
-  rightRotationHeadRotationOffset: -20
-  maxDeltaHeadRotation: 80
-  ignoreYPos: 1
-  autoDetectHandsBehindHead: 1
-  clampRotationToHead: 1
-  clampingHeadRotation: 0
-  neckRightRotation: 0
 --- !u!1 &744866222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1128,9 @@ MonoBehaviour:
   weight1OfRotationAboutX: 135.3
   weight2OfRotationAboutX: 0.333
   rightRotationHeadRotationOffset: -20
+  rotationForward: 0
+  weight1OfRotationAboutZ: 135.3
+  weight2OfRotationAboutZ: 0.333
   upperBodyRightRotation: 0
 --- !u!1 &1221391369
 GameObject:
@@ -1164,7 +1140,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1221391370}
-  - component: {fileID: 1221391371}
   m_Layer: 0
   m_Name: m_avg_Neck
   m_TagString: Untagged
@@ -1186,32 +1161,6 @@ Transform:
   m_Father: {fileID: 711618503}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1221391371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1221391369}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a941b1ce8c786b440ac8deb980cc664f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  avatarTrackingReferences: {fileID: 783212397}
-  upperBody: {fileID: 0}
-  headNeckDistance: 0.13
-  headNeckDirectionVector: {x: 0, y: -1, z: -0.05}
-  neckShoulderDistance: {x: 0, y: -0.1, z: -0.02}
-  weight1OfRotationAboutX: 135.3
-  weight2OfRotationAboutX: 0.333
-  rightRotationStartHeight: 0
-  rightRotationHeadRotationOffset: -20
-  maxDeltaHeadRotation: 80
-  ignoreYPos: 1
-  autoDetectHandsBehindHead: 1
-  clampRotationToHead: 1
-  clampingHeadRotation: 0
-  neckRightRotation: 0
 --- !u!1 &1236154023
 GameObject:
   m_ObjectHideFlags: 0

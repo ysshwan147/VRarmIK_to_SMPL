@@ -17,6 +17,10 @@ namespace VRArmIKtoSMPL
         public float weight2OfRotationAboutX = 0.333f;
         public float rightRotationHeadRotationOffset = -20f;
 
+        public bool rotationForward = false;
+        public float weight1OfRotationAboutZ = 135.3f;
+        public float weight2OfRotationAboutZ = 0.333f;
+
         public float upperBodyRightRotation;
 
         // Use this for initialization
@@ -39,6 +43,7 @@ namespace VRArmIKtoSMPL
         /// </summary>
         void rotateUpperBodyAboutX()
         {
+            Vector3 targetRotation = new Vector3(0.0f, 0.0f, 0.0f);
             float hmdHeight = avatarTrackingReferences.hmd.position.y;
             float heightRatio = Mathf.Clamp((upperBody.playerHeightHmd - hmdHeight) / upperBody.playerHeightHmd, 0f, 1f);
 
@@ -49,10 +54,22 @@ namespace VRArmIKtoSMPL
             upperBodyRightRotation = heightRatio * weight1OfRotationAboutX;
             upperBodyRightRotation += Mathf.Clamp(headRightRotation * weight2OfRotationAboutX * heightRatio, 0f, 50f);
 
+            if (rotationForward)
+            {
+                float headForwardRotation = VectorHelpers.getAngleBetween(transform.right,
+                                          avatarTrackingReferences.hmd.right,
+                                          Vector3.up, transform.forward);
+
+                float upperBodyForwardRotation = heightRatio * weight1OfRotationAboutZ;
+                upperBodyForwardRotation += Mathf.Clamp(headForwardRotation * weight2OfRotationAboutZ * heightRatio, -50f, 50f);
+
+                targetRotation.z = upperBodyForwardRotation;
+            }
+
             //Quaternion deltaRot = Quaternion.AngleAxis(neckRightRotation, transform.right);
             //transform.rotation = deltaRot * transform.rotation;
 
-            Vector3 targetRotation = new Vector3(upperBodyRightRotation, 0f, 0f);
+            targetRotation.x = upperBodyRightRotation;
             transform.eulerAngles = targetRotation;
 
             //positionNeckRelative();
