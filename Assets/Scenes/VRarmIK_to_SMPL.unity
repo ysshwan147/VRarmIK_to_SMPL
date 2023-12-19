@@ -1128,9 +1128,6 @@ MonoBehaviour:
   weight1OfRotationAboutX: 135.3
   weight2OfRotationAboutX: 0.333
   rightRotationHeadRotationOffset: -20
-  rotationForward: 0
-  weight1OfRotationAboutZ: 135.3
-  weight2OfRotationAboutZ: 0.333
   upperBodyRightRotation: 0
 --- !u!1 &1221391369
 GameObject:
@@ -2538,43 +2535,43 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.29883623
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.29883623
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.64085644
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.64085644
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4227128382712194, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -50
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.29883623
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.29883623
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.64085644
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.64085644
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -50
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 4642637535447012, guid: 620cf02f147c0a04e863168223ec1358, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2747,7 +2744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPosition: {x: 0.028, y: -0.031, z: -0.109}
-  localEulerAngles: {x: -50, y: 0, z: -90}
+  localEulerAngles: {x: -90, y: 0, z: -90}
 --- !u!114 &2102223452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2760,7 +2757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPosition: {x: -0.028, y: -0.031, z: -0.109}
-  localEulerAngles: {x: -50, y: 0, z: 90}
+  localEulerAngles: {x: -90, y: 0, z: 90}
 --- !u!114 &2102223453
 MonoBehaviour:
   m_ObjectHideFlags: 0
