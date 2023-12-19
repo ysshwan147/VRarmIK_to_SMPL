@@ -27,7 +27,7 @@ namespace VRArmIKtoSMPL
 
         void FixedUpdate()
         {
-            
+
         }
 
         void Update()
@@ -42,7 +42,7 @@ namespace VRArmIKtoSMPL
 
         void LateUpdate()
         {
-            
+
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace VRArmIKtoSMPL
                 // calculate inner angle
                 angle = Mathf.Acos(Mathf.Clamp((Mathf.Pow(upperBody.upperArmLength, 2f) + Mathf.Pow(upperBody.lowerArmLength, 2f) -
                                                 Mathf.Pow(targetShoulderDistance, 2f)) / (2f * upperBody.upperArmLength * upperBody.lowerArmLength), -1f, 1f)) * Mathf.Rad2Deg;
-                
+
                 // from inner angle to elbow rotation angle
                 if (isLeft)
                     angle = 180f - angle;

@@ -124,6 +124,11 @@ namespace VRArmIKtoSMPL
 
         /// <summary>
         /// 논문에 언급X
+        /// We found that applying the same blending as the hand moves behind the shoulder also increases IK quality, 
+        /// blending within the range 0 to 0.1 m on the forward axis.
+        /// 위 부분일 수 가능성 있음
+        /// same blending으로 보이진 않지만 어깨 축 근처, 손을 어깨 위쪽 위치에서 어깨 뒤로 넘기는 동작에 대해 IK 품질을 개선한듯 보임
+        /// 어깨대비 타겟의 위치가 z값 0.4보다 작고, y값 0.1보다 크고, x값 -1~1 사이일때 보정
         /// target이 축 근처에서 움직일 때의 보정
         /// startBelowZ = 0.4, startAboveY = 0.1, weight1 = -0.5
         /// </summary>

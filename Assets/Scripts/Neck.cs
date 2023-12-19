@@ -50,7 +50,7 @@ namespace VRArmIKtoSMPL
 		// Update is called once per frame
 		void Update()
 		{
-            //positionNeck();
+            positionNeck();
             rotateNeckAboutY();
             rotateNeckAboutX();
 		}
@@ -113,7 +113,7 @@ namespace VRArmIKtoSMPL
 
             transform.rotation = deltaRot * transform.rotation;
 
-            //positionNeckRelative();
+            positionNeckRelative();
         }
 
         void positionNeckRelative()

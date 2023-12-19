@@ -7,7 +7,7 @@ namespace VRArmIKtoSMPL
     /// neck과 shoulder의 상위인 spine3에 적용
     /// </summary>
 	public class Spine3 : MonoBehaviour
-	{
+    {
         public AvatarVRTrackingReferences avatarTrackingReferences;
 
         // 논문에선 90도로 제한 뒀지만 깃헙에선 80도로 제한되어있어 80 사용
